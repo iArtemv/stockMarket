@@ -30,11 +30,11 @@ public class MatchingEngine {
         this.ses.scheduleAtFixedRate(() -> match(orderBooks, tradeLedger), 0, 1, TimeUnit.SECONDS);
     }
 
-    protected void stop() {
+    public void stop() {
         this.ses.shutdown();
     }
 
-    private void match(iOrderBooks orderBooks, iTradeLedger tradeLedger) {
+    public void match(iOrderBooks orderBooks, iTradeLedger tradeLedger) {
 
         for (iOrderBook orderBook : orderBooks.get()) {
 
