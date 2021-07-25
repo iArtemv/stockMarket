@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TradingGateway {
 
+    public static final String QUITE = "q";
     private final iOrderBooks orderBooks;
     private final iTradeLedger tradeLedger;
     private final ScheduledExecutorService ses;
@@ -46,7 +47,7 @@ public class TradingGateway {
 
     private void scanCommand() {
         Scanner in = new Scanner(System.in);
-        this.isQuit = in.hasNext("q");
+        this.isQuit = in.hasNext(QUITE);
         if (in.hasNext()) {
             String next = in.next();
             Command command;
