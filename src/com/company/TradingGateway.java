@@ -10,6 +10,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Object allows a client to trade on the market.
+ *
+ */
 public class TradingGateway {
 
     private final iOrderBooks orderBooks;
@@ -17,6 +21,12 @@ public class TradingGateway {
     private final ScheduledExecutorService ses;
     private boolean isQuit;
 
+    /**
+     * Create new Trading Gateway object.
+     *
+     * @param orderBooks contains all orders (buy and sell) for a certain stock.
+     * @param tradeLedger contains all trades that happen on all order books.
+     */
     public TradingGateway(iOrderBooks orderBooks, iTradeLedger tradeLedger) {
 
         this.orderBooks = orderBooks;
@@ -73,12 +83,28 @@ public class TradingGateway {
         }
     }
 
+    /**
+     * Add order.
+     *
+     * @param stock stock
+     * @param type type
+     * @param quantity quantity
+     * @param price price
+     */
     public void addOrder(String stock, TransactionType type, int quantity, int price) {
         iOrderBook orderBook = orderBooks.getOrderBook(stock);
         iOrder order = new Order(stock, type, quantity, price);
         orderBook.add(order);
     }
 
+    /**
+     * Cancel order.
+     *
+     * @param stock stock
+     * @param type type
+     * @param quantity quantity
+     * @param price price
+     */
     public void cancelOrder(String stock, TransactionType type, int quantity, int price) {
         iOrderBook orderBook = orderBooks.getOrderBook(stock);
         orderBook.get().stream().filter(o -> tradeLedger.get().stream().noneMatch(t -> t.getOrder(o.getType()).getID() == o.getID())

@@ -11,10 +11,19 @@ import java.util.stream.Collectors;
 
 import static java.lang.Math.min;
 
+/**
+ * "Balances" (like in "balancing the book", i.e. crossing buys and sells) the order books every 1 second.
+ */
 public class MatchingEngine {
 
     private final ScheduledExecutorService ses;
 
+    /**
+     * Create new Matching Engine object.
+     *
+     * @param orderBooks contains all orders (buy and sell) for a certain stock.
+     * @param tradeLedger contains all trades that happen on all order books.
+     */
     public MatchingEngine(iOrderBooks orderBooks, iTradeLedger tradeLedger) {
 
         this.ses = Executors.newSingleThreadScheduledExecutor();
