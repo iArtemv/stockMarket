@@ -54,7 +54,7 @@ public class MatchingEngine {
                         int minQuantity = min(orderBuy.getQuantity(), orderSell.getQuantity());
                         iTrade trade = new Trade(orderBuy, orderSell, minQuantity, orderBuy.getPrice());
                         tradeLedger.add(trade);
-                        return;
+                        break;
                     }
                 }
             }

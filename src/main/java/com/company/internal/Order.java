@@ -3,10 +3,11 @@ package com.company.internal;
 import com.company.iOrder;
 
 import java.time.OffsetDateTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Order implements iOrder {
 
-    private static int lastID = 0;
+    private static AtomicInteger lastID = new AtomicInteger(0);
     private final String stock;
     private final TransactionType type;
     private final int quantity;
@@ -20,7 +21,7 @@ public class Order implements iOrder {
         this.quantity = quantity;
         this.price = price;
         this.time = OffsetDateTime.now();
-        this.ID = ++lastID;
+        this.ID = lastID.incrementAndGet();
     }
 
     @Override

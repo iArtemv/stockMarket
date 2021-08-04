@@ -3,18 +3,18 @@ package com.company.internal;
 import com.company.iOrder;
 import com.company.iOrderBook;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OrderBook implements iOrderBook {
 
-    private final Collection<iOrder> orders;
+    private final CopyOnWriteArrayList<iOrder> orders;
     private final String symbol;
 
     public OrderBook(String symbol) {
 
-        this.orders = new ArrayList<>();
+        this.orders = new CopyOnWriteArrayList<>();
         this.symbol = symbol.toUpperCase(Locale.ROOT);
 
     }

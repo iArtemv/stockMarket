@@ -3,15 +3,15 @@ package com.company.internal;
 import com.company.iTrade;
 import com.company.iTradeLedger;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TradeLedger implements iTradeLedger {
 
-    private final Collection<iTrade> trades;
+    private final CopyOnWriteArrayList<iTrade> trades;
 
     public TradeLedger() {
-        this.trades = new ArrayList<>();
+        this.trades = new CopyOnWriteArrayList<>();
     }
 
     @Override

@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class MatchingEngineTest {
 
     @Test
-    public void match() {
+    public void match() throws InterruptedException {
 
         iOrderBooks orderBooks = new OrderBooks();
         assertNotNull(orderBooks);
@@ -31,10 +31,23 @@ public class MatchingEngineTest {
         orderBook.add(order);
         orderBook.add(order2);
 
-        matchingEngine.match(orderBooks, tradeLedger);
+        iOrder order3 = new Order("YNDX", TransactionType.B, 100, 50);
+        assertNotNull(order);
+
+        iOrder order4 = new Order("YNDX", TransactionType.S, 100, 50);
+        assertNotNull(order2);
+
+        iOrderBook orderBook2 = orderBooks.getOrderBook("YNDX");
+        assertNotNull(orderBook2);
+
+        orderBook2.add(order3);
+        orderBook2.add(order4);
+
+        Thread.sleep(2000);
+
         matchingEngine.stop();
 
-        assertEquals(1, tradeLedger.get().size());
+        assertEquals(2, tradeLedger.get().size());
 
     }
 }
